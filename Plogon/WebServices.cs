@@ -33,7 +33,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.PostAsync(
-            $"https://kamori.goats.dev/Plogon/RegisterMessageId?key={this.key}&prNumber={prNumber}&messageId={messageId}",
+            $"https://dohwacorp.github.io/Plogon/RegisterMessageId?key={this.key}&prNumber={prNumber}&messageId={messageId}",
             null);
         result.EnsureSuccessStatusCode();
     }
@@ -47,7 +47,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.GetAsync(
-            $"https://kamori.goats.dev/Plogon/GetMessageIds?prNumber={prNumber}");
+            $"https://dohwacorp.github.io/Plogon/GetMessageIds?prNumber={prNumber}");
         result.EnsureSuccessStatusCode();
 
         return await result.Content.ReadFromJsonAsync<string[]>() ?? Array.Empty<string>();
@@ -63,7 +63,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.PostAsync(
-            $"https://kamori.goats.dev/Plogon/RegisterVersionPrNumber?key={this.key}&prNumber={prNumber}&internalName={internalName}&version={version}",
+            $"https://dohwacorp.github.io/Plogon/RegisterVersionPrNumber?key={this.key}&prNumber={prNumber}&internalName={internalName}&version={version}",
             null);
         
         Log.Information(await result.Content.ReadAsStringAsync());
@@ -80,7 +80,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.GetAsync(
-            $"https://kamori.goats.dev/Plogon/GetVersionChangelog?internalName={internalName}&version={version}");
+            $"https://dohwacorp.github.io/Plogon/GetVersionChangelog?internalName={internalName}&version={version}");
 
         if (result.StatusCode == HttpStatusCode.NotFound)
             return null;
@@ -109,7 +109,7 @@ public class WebServices
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-XL-Key", this.key);
         var result = await client.PostAsync(
-            $"https://kamori.goats.dev/Plogon/StagePluginBuild",
+            $"https://dohwacorp.github.io/Plogon/StagePluginBuild",
             JsonContent.Create(info));
         
         Log.Information(await result.Content.ReadAsStringAsync());
