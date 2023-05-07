@@ -23,12 +23,12 @@ public class DiscordWebhook
         this.Client = new DiscordWebhookClient(Environment.GetEnvironmentVariable("DISCORD_WEBHOOK"));
     }
 
-    private static DateTime GetPacificStandardTime()
+    private static DateTime GetKoreaStandardTime()
     {
         var utc = DateTime.UtcNow;
-        var pacificZone = TimeZoneInfo.FindSystemTimeZoneById("America/Los_Angeles");
-        var pacificTime = TimeZoneInfo.ConvertTimeFromUtc(utc, pacificZone);
-        return pacificTime;
+        var koreaZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Seoul");
+        var koreaTime = TimeZoneInfo.ConvertTimeFromUtc(utc, koreaZone);
+        return koreaTime;
     }
     
     /// <summary>
@@ -47,7 +47,7 @@ public class DiscordWebhook
             .WithDescription(message)
             .Build();
 
-        var time = GetPacificStandardTime();
+        var time = GetKoreaStandardTime();
         var username = "Plo";
         var avatarUrl = "https://dohwacorp.github.io/icons/plo.png";
         if (time.Hour is > 20 or < 7)
