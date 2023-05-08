@@ -235,52 +235,52 @@ class Program
                             //    await webservices.RegisterPrNumber(task.InternalName, task.Manifest.Plugin.Commit,
                             //        prNumber);
 
-                            //if (commit)
-                            //{
-                            //    int? prInt = null;
-                            //    if (int.TryParse(
-                            //            await webservices.GetPrNumber(task.InternalName, task.Manifest.Plugin.Commit),
-                            //            out var commitPrNum))
-                            //    {
-                            //        // Let's try again here in case we didn't get it the first time around
-                            //        if (string.IsNullOrEmpty(changelog) && repoName != null &&
-                            //            gitHubApi != null)
-                            //        {
-                            //            changelog = await gitHubApi.GetIssueBody(commitPrNum);
-                            //        }
+                            if (commit)
+                            {
+                                int? prInt = null;
+                                //if (int.TryParse(
+                                //        await webservices.GetPrNumber(task.InternalName, task.Manifest.Plugin.Commit),
+                                //        out var commitPrNum))
+                                //{
+                                //    // Let's try again here in case we didn't get it the first time around
+                                //    if (string.IsNullOrEmpty(changelog) && repoName != null &&
+                                //        gitHubApi != null)
+                                //    {
+                                //        changelog = await gitHubApi.GetIssueBody(commitPrNum);
+                                //    }
 
-                            //        prInt = commitPrNum;
-                            //    }
+                                //    prInt = commitPrNum;
+                                //}
 
-                            //    await webservices.StagePluginBuild(new WebServices.StagedPluginInfo
-                            //    {
-                            //        InternalName = task.InternalName,
-                            //        Version = status.Version!,
-                            //        Dip17Track = task.Channel,
-                            //        PrNumber = prInt,
-                            //        Changelog = changelog,
-                            //        IsInitialRelease = task.IsNewPlugin,
-                            //        DiffLinesAdded = status.DiffLinesAdded,
-                            //        DiffLinesRemoved = status.DiffLinesRemoved,
-                            //    });
+                                //await webservices.StagePluginBuild(new WebServices.StagedPluginInfo
+                                //{
+                                //    InternalName = task.InternalName,
+                                //    Version = status.Version!,
+                                //    Dip17Track = task.Channel,
+                                //    PrNumber = prInt,
+                                //    Changelog = changelog,
+                                //    IsInitialRelease = task.IsNewPlugin,
+                                //    DiffLinesAdded = status.DiffLinesAdded,
+                                //    DiffLinesRemoved = status.DiffLinesRemoved,
+                                //});
 
-                            //    if (status.DiffLinesAdded.HasValue)
-                            //    {
-                            //        if (status.DiffLinesAdded > 400 && !prLabels.HasFlag(GitHubApi.PrLabel.SizeLarge))
-                            //        {
-                            //            prLabels &= ~GitHubApi.PrLabel.SizeSmall;
-                            //            prLabels |= GitHubApi.PrLabel.SizeMid;
-                            //        }
-                            //        else if (status.DiffLinesAdded > 1000)
-                            //        {
-                            //            prLabels &= ~GitHubApi.PrLabel.SizeSmall;
-                            //            prLabels &= ~GitHubApi.PrLabel.SizeMid;
-                            //            prLabels |= GitHubApi.PrLabel.SizeLarge;
-                            //        }
-                            //        else if (!prLabels.HasFlag(GitHubApi.PrLabel.SizeMid) && !prLabels.HasFlag(GitHubApi.PrLabel.SizeLarge))
-                            //            prLabels |= GitHubApi.PrLabel.SizeSmall;
-                            //    }
-                            //}
+                                if (status.DiffLinesAdded.HasValue)
+                                {
+                                    if (status.DiffLinesAdded > 400 && !prLabels.HasFlag(GitHubApi.PrLabel.SizeLarge))
+                                    {
+                                        prLabels &= ~GitHubApi.PrLabel.SizeSmall;
+                                        prLabels |= GitHubApi.PrLabel.SizeMid;
+                                    }
+                                    else if (status.DiffLinesAdded > 1000)
+                                    {
+                                        prLabels &= ~GitHubApi.PrLabel.SizeSmall;
+                                        prLabels &= ~GitHubApi.PrLabel.SizeMid;
+                                        prLabels |= GitHubApi.PrLabel.SizeLarge;
+                                    }
+                                    else if (!prLabels.HasFlag(GitHubApi.PrLabel.SizeMid) && !prLabels.HasFlag(GitHubApi.PrLabel.SizeLarge))
+                                        prLabels |= GitHubApi.PrLabel.SizeSmall;
+                                }
+                            }
                         }
                         else
                         {
@@ -384,7 +384,7 @@ class Program
                     //}
                     //else
                     //{
-                    //hookTitle += " updated";
+                    //    hookTitle += " updated";
                     //}
 
                     hookTitle += " updated";
@@ -405,8 +405,8 @@ class Program
                         hookTitle, ok ? "Accepted" : "Rejected");
                     //await webservices.RegisterMessageId(prNumber!, id);
 
-                    if (gitHubApi != null)
-                        await gitHubApi.SetPrLabels(prNum, prLabels);
+                    //if (gitHubApi != null)
+                    //    await gitHubApi.SetPrLabels(prNum, prLabels);
                 }
 
                 if (repoName != null && commit && anyTried)
@@ -416,63 +416,63 @@ class Program
                         "Builds committed", string.Empty);
 
                     // TODO: We don't support this for removals for now
-                    //foreach (var buildResult in statuses.Where(x => x.Task.Type == BuildTask.TaskType.Build))
-                    //{
-                    //    if (!buildResult.Success && !aborted)
-                    //        continue;
+                    foreach (var buildResult in statuses.Where(x => x.Task.Type == BuildTask.TaskType.Build))
+                    {
+                        if (!buildResult.Success && !aborted)
+                            continue;
 
-                    //    var resultPrNum =
-                    //        await webservices.GetPrNumber(buildResult.Task.InternalName, buildResult.Task.Manifest!.Plugin.Commit);
-                    //    if (resultPrNum == null)
-                    //    {
-                    //        Log.Warning("No PR for {InternalName} - {Version}", buildResult.Task.InternalName,
-                    //            buildResult.Version);
-                    //        continue;
-                    //    }
+                        //var resultPrNum =
+                        //    await webservices.GetPrNumber(buildResult.Task.InternalName, buildResult.Task.Manifest!.Plugin.Commit);
+                        //if (resultPrNum == null)
+                        //{
+                        //    Log.Warning("No PR for {InternalName} - {Version}", buildResult.Task.InternalName,
+                        //        buildResult.Version);
+                        //    continue;
+                        //}
 
-                    //    try
-                    //    {
-                    //        var msgIds = await webservices.GetMessageIds(resultPrNum);
+                        //try
+                        //{
+                        //    var msgIds = await webservices.GetMessageIds(resultPrNum);
 
-                    //        foreach (var id in msgIds)
-                    //        {
-                    //            await webhook.Client.ModifyMessageAsync(ulong.Parse(id), properties =>
-                    //            {
-                    //                var embed = properties.Embeds.Value.First();
-                    //                var newEmbed = new EmbedBuilder()
-                    //                    .WithColor(Color.LightGrey)
-                    //                    .WithTitle(embed.Title)
-                    //                    .WithCurrentTimestamp()
-                    //                    .WithDescription(embed.Description);
+                        //    foreach (var id in msgIds)
+                        //    {
+                        //        await webhook.Client.ModifyMessageAsync(ulong.Parse(id), properties =>
+                        //        {
+                        //            var embed = properties.Embeds.Value.First();
+                        //            var newEmbed = new EmbedBuilder()
+                        //                .WithColor(Color.LightGrey)
+                        //                .WithTitle(embed.Title)
+                        //                .WithCurrentTimestamp()
+                        //                .WithDescription(embed.Description);
 
-                    //                if (embed.Author.HasValue)
-                    //                    newEmbed = newEmbed.WithAuthor(embed.Author.Value.Name,
-                    //                        embed.Author.Value.IconUrl,
-                    //                        embed.Author.Value.Url);
+                        //            if (embed.Author.HasValue)
+                        //                newEmbed = newEmbed.WithAuthor(embed.Author.Value.Name,
+                        //                    embed.Author.Value.IconUrl,
+                        //                    embed.Author.Value.Url);
 
-                    //                if (embed.Footer.HasValue)
-                    //                {
-                    //                    if (embed.Footer.Value.Text.Contains("Comment"))
-                    //                    {
-                    //                        newEmbed = newEmbed.WithFooter(
-                    //                            embed.Footer.Value.Text.Replace("Comment", "Committed"),
-                    //                            embed.Footer.Value.IconUrl);
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        newEmbed = newEmbed.WithFooter("Committed");
-                    //                    }
-                    //                }
+                        //            if (embed.Footer.HasValue)
+                        //            {
+                        //                if (embed.Footer.Value.Text.Contains("Comment"))
+                        //                {
+                        //                    newEmbed = newEmbed.WithFooter(
+                        //                        embed.Footer.Value.Text.Replace("Comment", "Committed"),
+                        //                        embed.Footer.Value.IconUrl);
+                        //                }
+                        //                else
+                        //                {
+                        //                    newEmbed = newEmbed.WithFooter("Committed");
+                        //                }
+                        //            }
 
-                    //                properties.Embeds = new[] { newEmbed.Build() };
-                    //            });
-                    //        }
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Log.Error(ex, "Could not update messages");
-                    //    }
-                    //}
+                        //            properties.Embeds = new[] { newEmbed.Build() };
+                        //        });
+                        //    }
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Log.Error(ex, "Could not update messages");
+                        //}
+                    }
                 }
             }
         }
