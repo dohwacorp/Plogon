@@ -12,7 +12,7 @@ namespace Plogon;
 
 class Program
 {
-    private static readonly string[] AlwaysBuildUsers = new[] { "goaaats", "KangDohwa", "dohwadev" };
+    private static readonly string[] AlwaysBuildUsers = new[] { "goaaats", "KangDohwa", "dohwadev", "dohwacorp" };
 
     /// <summary>
     /// The main entry point for the application.
@@ -351,7 +351,7 @@ class Program
                     var alreadyPosted = existingMessages.Length > 0;
 
                     var links =
-                        $"[Show log](https://github.com/dohwacorp/DalamudPluginsD17/actions/runs/{actionRunId}) - [Review](https://github.com/goatcorp/DalamudPluginsD17/pull/{prNumber}/files#submit-review)";
+                        $"[Show log](https://github.com/dohwacorp/DalamudPluginsD17/actions/runs/{actionRunId}) - [Review](https://github.com/dohwacorp/DalamudPluginsD17/pull/{prNumber}/files#submit-review)";
 
                     var commentText = anyFailed ? "Builds failed, please check action output." : "All builds OK!";
                     if (!anyTried)
