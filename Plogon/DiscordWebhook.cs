@@ -49,11 +49,11 @@ public class DiscordWebhook
 
         var time = GetKoreaStandardTime();
         var username = "Plo";
-        var avatarUrl = "https://dohwacorp.github.io/icons/plo.png";
+        var avatarUrl = "https://raw.githubusercontent.com/dohwacorp/dohwacorp.github.io/main/icons/plo.png";
         if (time.Hour is > 20 or < 7)
         {
             username = "Gon";
-            avatarUrl = "https://dohwacorp.github.io/icons/gon.png";
+            avatarUrl = "https://raw.githubusercontent.com/dohwacorp/dohwacorp.github.io/main/icons/gon.png";
         }
         
         return await this.Client.SendMessageAsync(embeds: new[] { embed }, username: username, avatarUrl: avatarUrl);
