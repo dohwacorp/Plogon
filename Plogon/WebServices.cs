@@ -33,7 +33,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.PostAsync(
-            $"https://dohwacorp.github.io/Plogon/RegisterMessageId?key={this.key}&prNumber={prNumber}&messageId={messageId}",
+            $"https://jjae.xyz/Plogon/RegisterMessageId?key={this.key}&prNumber={prNumber}&messageId={messageId}",
             null);
         result.EnsureSuccessStatusCode();
     }
@@ -47,7 +47,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.GetAsync(
-            $"https://dohwacorp.github.io/Plogon/GetMessageIds?prNumber={prNumber}");
+            $"https://jjae.xyz/Plogon/GetMessageIds?prNumber={prNumber}");
         result.EnsureSuccessStatusCode();
 
         return await result.Content.ReadFromJsonAsync<string[]>() ?? Array.Empty<string>();
@@ -63,7 +63,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.PostAsync(
-            $"https://dohwacorp.github.io/Plogon/RegisterVersionPrNumber?key={this.key}&prNumber={prNumber}&internalName={internalName}&version={version}",
+            $"https://jjae.xyz/Plogon/RegisterVersionPrNumber?key={this.key}&prNumber={prNumber}&internalName={internalName}&version={version}",
             null);
         
         Log.Information(await result.Content.ReadAsStringAsync());
@@ -80,7 +80,7 @@ public class WebServices
     {
         using var client = new HttpClient();
         var result = await client.GetAsync(
-            $"https://dohwacorp.github.io/Plogon/GetVersionChangelog?internalName={internalName}&version={version}");
+            $"https://jjae.xyz/Plogon/GetVersionChangelog?internalName={internalName}&version={version}");
 
         if (result.StatusCode == HttpStatusCode.NotFound)
             return null;
@@ -109,7 +109,7 @@ public class WebServices
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-XL-Key", this.key);
         var result = await client.PostAsync(
-            $"https://dohwacorp.github.io/Plogon/StagePluginBuild",
+            $"https://jjae.xyz/Plogon/StagePluginBuild",
             JsonContent.Create(info));
         
         Log.Information(await result.Content.ReadAsStringAsync());
